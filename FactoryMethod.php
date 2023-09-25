@@ -25,6 +25,24 @@ abstract class CommManager
     abstract public function getApptEncoder():ApptEncoder;
     abstract public function getFooterText():string;
 }
+class MegaCommsManager extends CommManager
+{
+    public function getHeaderText(): string
+    {
+        // TODO: Implement getHeaderText() method.
+        return "ерхний колонтитул MegaCal\n";
+    }
+    public function getApptEncoder(): ApptEncoder
+    {
+        // TODO: Implement getApptEncoder() method.
+        return new MegaApptEncoder();
+    }
+    public function getFooterText(): string
+    {
+        // TODO: Implement getFooterText() method.
+        return "Нижний колонтитул MegaCal\n";
+    }
+}
 class BloggsCommsManager extends CommManager
 {
     public function getHeaderText():string
