@@ -19,39 +19,30 @@ class MegaApptEncoder extends ApptEncoder
         return "Данные о встрече в формате MegaCal \n";
     }
 }
-class CommManager
+abstract class CommManager
 {
-    public const BLOGGS = 1;
-    public const MEGA =2;
-    public function __construct(private int $mode)
-    {
-
-    }
-    public function getApptEncoder():ApptEncoder
-    {
-        switch ($this->mode)
-        {
-            case (self::MEGA):
-                return new MegaApptEncoder();
-            default:
-                return new BloggsApptEncoder();
-        }
-
-    }
+    abstract public function getHeaderText():string;
+    abstract public function getApptEncoder():ApptEncoder;
+    abstract public function getFooterText():string;
+}
+class BloggsCommsManager extends CommManager
+{
     public function getHeaderText():string
     {
-        switch ($this->mode)
-        {
-            case (self::MEGA):
-                return "MegaCal header\n";
-            default:
-                return "BloggsCal header\n";
-        }
+        return "ерхний колонтитул BloggsCal\n";
+    }
+    public function getApptEncoder(): ApptEncoder
+    {
+        return new BloggsApptEncoder();
+    }
+    public function getFooterText():string
+    {
+        return "Нижний колонтитул BloggsCal\n";
     }
 }
 
 
-$man = new CommManager(CommManager::MEGA);
-print (get_class($man->getApptEncoder())) . "\n";
-$man = new CommManager(CommManager::BLOGGS);
-print (get_class($man->getApptEncoder())) . "\n";
+$mgr = new BloggsCommsManager();
+print $mgr->getHeaderText();
+print $mgr->getApptEncoder()->encode();
+print $mgr->getFooterText();
