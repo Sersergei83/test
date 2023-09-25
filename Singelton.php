@@ -29,4 +29,4 @@ $pref->setProperty("name","Иван");
 unset($pref);
 
 $pref2=Preferences::getInstance();
-print $pref2->getProperty("name") . "\n";
+print $pref2->getProperty("name") . "\n"; gyg yug
