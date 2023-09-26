@@ -37,4 +37,3 @@ class BloggsCommsManager extends CommsManager
         return "Нижний колонтитул BloggsCal\n";
     }
 }
-c
