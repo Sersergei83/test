@@ -1,16 +1,6 @@
 <?php
 abstract class Unit
 {
-    abstract public function addUnit(Unit $unit):void;
-    abstract public function removeUnit(Unit $unit):void;
-    abstract public function bombardStrenght():int;
-}
-class UnitException extends \Exception
-{
-
-}
-class Archer extends Unit
-{
     public function addUnit(Unit $unit): void
     {
         // TODO: Implement addUnit() method.
@@ -21,6 +11,15 @@ class Archer extends Unit
         // TODO: Implement removeUnit() method.
         throw new UnitException(get_class($this)."являеться листом");
     }
+    abstract public function bombardStrenght():int;
+}
+class UnitException extends \Exception
+{
+
+}
+class Archer extends Unit
+{
+
 
     public function bombardStrenght(): int
     {
@@ -69,9 +68,15 @@ class Army extends Unit
     }
 }
 
-$unit1=new Archer();
-$unit2=new LaserCannonUnit();
-$army=new Army();
-$army->addUnit($unit1);
-$army->addUnit($unit2);
-print $army->bombardStrenght();
+$main_army=new Army();
+$main_army->addUnit(new Archer());
+$main_army->addUnit(new LaserCannonUnit());
+
+$sub_army=new Army();
+$sub_army->addUnit(new Archer());
+$sub_army->addUnit(new Archer());
+$sub_army->addUnit(new Archer());
+
+$main_army->addUnit($sub_army);
+
+print $main_army->bombardStrenght();
