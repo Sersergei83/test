@@ -59,8 +59,9 @@ class BloggsCommsManager extends CommManager
     }
 }
 
-
+/*
 $mgr = new BloggsCommsManager();
 print $mgr->getHeaderText();
 print $mgr->getApptEncoder()->encode();
 print $mgr->getFooterText();
+*/
