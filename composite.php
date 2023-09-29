@@ -1,11 +1,27 @@
 <?php
 abstract class Unit
 {
-
+    abstract public function addUnit(Unit $unit):void;
+    abstract public function removeUnit(Unit $unit):void;
     abstract public function bombardStrenght():int;
+}
+class UnitException extends \Exception
+{
+
 }
 class Archer extends Unit
 {
+    public function addUnit(Unit $unit): void
+    {
+        // TODO: Implement addUnit() method.
+        throw new UnitException(get_class($this)."являеться листом");
+    }
+    public function removeUnit(Unit $unit): void
+    {
+        // TODO: Implement removeUnit() method.
+        throw new UnitException(get_class($this)."являеться листом");
+    }
+
     public function bombardStrenght(): int
     {
         // TODO: Implement bombardStrenght) method.
@@ -20,27 +36,34 @@ class LaserCannonUnit extends Unit
         return 44;
     }
 }
-class Army
+class Army extends Unit
 {
     private array $units=[];
     public function addUnit(Unit $unit):void
     {
-        array_push($this->units,$unit);
+        if(in_array($unit,$this->units,true))
+        {
+            return;
+        }
+        $this->units[]=$unit;
     }
-    public function addArmy(Army $army):void
+    public function removeUnit(Unit $unit): void
     {
-        array_push($this->armies,$army);
+        // TODO: Implement removeUnit() method.
+        $idx=array_search($unit,$this->units,true);
+        if (is_int($idx))
+        {
+            array_splice($this->units,$idx,1,[]);
+        }
     }
+
+
     public function bombardStrenght():int
     {
         $ret=0;
         foreach ($this->units as $unit)
         {
             $ret +=$unit->bombardStrenght();
-        }
-        foreach ($this->armies as $army)
-        {
-            $ret +=$army->bobombardStrenght();
         }
         return $ret;
     }
