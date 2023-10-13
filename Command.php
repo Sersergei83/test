@@ -19,7 +19,7 @@ class CommandContext
         $this->params[$key] = $val;
     }
 
-    public function get(string $key): string
+    public function get(string $key): ?string
     {
         if (isset($this->params[$key])) {
             return $this->params[$key];

@@ -1,4 +1,5 @@
 <?php
+include_once "Visitor.php";
 abstract class Unit
 {
     // ...
